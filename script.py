@@ -38,16 +38,10 @@ def main():
                     print(json.dumps(event.__dict__))
                     pass
                 case EventType.STOP:
-                    userId = random.choice(users)
-                    contentId = random.choice(content)
-                    device = random.choice(devices)
-                    eventStart = time.time()
-                    for x in playing:
-                        if x.deviceId == userId and x.contentId == contentId and x.deviceType == device:
-                            playing.remove(x)
-                            event = Event(eventStart, device, userId, contentId, choice, eventStart)
-                            pass
-                    pass 
+                   if (len(playing) > 0):
+                        event = random.choice(playing)
+                        playing.remove(event)
+                        print(json.dumps(event.__dict__))
         end = time.time()
         for x in playing:
             x.eventType = EventType.PLAYING
